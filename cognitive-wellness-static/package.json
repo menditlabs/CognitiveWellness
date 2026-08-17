@@ -2,10 +2,13 @@
     "name": "cognitive-wellness-solutions",
     "private": true,
     "scripts": {
-      "dev": "wrangler dev",
-      "deploy": "wrangler deploy"
+        "dev": "wrangler dev",
+        "deploy": "wrangler deploy"
     },
     "devDependencies": {
-      "wrangler": "^4.0.0"
+        "wrangler": "^4.0.0"
+    },
+    "dependencies": {
+        "resend": "^6.20.0"
     }
-  }
+}
