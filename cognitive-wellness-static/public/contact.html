@@ -55,21 +55,66 @@
       </div>
     </div>
 
-    <form class="contact-form" action="#" method="post">
+    <form class="contact-form" id="contact-form">
       <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
       </div>
+  
       <div>
-        <label for="email2">Email</label>
-        <input type="email" id="email2" name="email" required>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
       </div>
+  
       <div>
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4"></textarea>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
       </div>
+  
       <button class="btn" type="submit">Submit</button>
-    </form>
+  
+      <p id="form-status" role="status"></p>
+  </form>
+  
+  <script>
+  document.getElementById("contact-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+  
+      const form = event.target;
+      const status = document.getElementById("form-status");
+      const button = form.querySelector("button");
+  
+      button.disabled = true;
+      button.textContent = "Sending...";
+      status.textContent = "";
+  
+      const formData = new FormData(form);
+  
+      try {
+          const response = await fetch("/api/contact", {
+              method: "POST",
+              body: formData
+          });
+  
+          const result = await response.json();
+  
+          if (!response.ok) {
+              throw new Error(result.error || "Unable to send message.");
+          }
+  
+          status.textContent = "Your message has been sent.";
+          form.reset();
+  
+      } catch (error) {
+          status.textContent = "Sorry, there was a problem sending your message.";
+          console.error(error);
+  
+      } finally {
+          button.disabled = false;
+          button.textContent = "Submit";
+      }
+  });
+  </script>
   </div>
 </section>
 
