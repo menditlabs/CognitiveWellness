@@ -23,7 +23,7 @@ export default {
 
                 const { data, error } = await resend.emails.send({
                     from: "Cognitive Wellness Solutions <website@cognitivewellnesssolutions.com>",
-                    to: ["howardn428@gmail.com"],
+                    to: ["jennifer@cognitivewellnesssolutions.com"],
                     replyTo: email,
                     subject: `Website Contact Form — ${name}`,
                     text: `
